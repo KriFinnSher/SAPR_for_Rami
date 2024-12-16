@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3333779f-1471-45ef-8ece-e88ff27d2e50" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/SAPR_for_Rami.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PostP/EpuraCalc.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PostP/FileCalc.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PostP/SectionCalc.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PostP/TablesCalc.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PreP/ConstructionDraw.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PreP/InputValidator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PreP/MainWindow.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proc/Porcessor.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2qIXouyPNEc45DU3e4sZ0qA0CGk" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore_missing_gitignore&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\gwert\PycharmProjects\SAPR_for_Rami\Proc" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="SAPR_for_Rami" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-PY-242.23339.19" />
+        <option value="bundled-python-sdk-0029f7779945-399fe30bd8c1-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-242.23339.19" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3333779f-1471-45ef-8ece-e88ff27d2e50" name="Changes" comment="" />
+      <created>1734351241672</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1734351241672</updated>
+      <workItem from="1734351242701" duration="103000" />
+      <workItem from="1734351353525" duration="539000" />
+      <workItem from="1734351964245" duration="386000" />
+      <workItem from="1734352363563" duration="137000" />
+      <workItem from="1734352520867" duration="1885000" />
+      <workItem from="1734354439475" duration="19000" />
+      <workItem from="1734354476235" duration="428000" />
+      <workItem from="1734354933598" duration="116000" />
+      <workItem from="1734355072760" duration="72000" />
+      <workItem from="1734355162216" duration="160000" />
+      <workItem from="1734355372989" duration="32000" />
+      <workItem from="1734355415218" duration="992000" />
+      <workItem from="1734356448348" duration="21000" />
+      <workItem from="1734356549306" duration="33000" />
+      <workItem from="1734356594647" duration="91000" />
+      <workItem from="1734356740754" duration="682000" />
+      <workItem from="1734357493910" duration="69000" />
+      <workItem from="1734357575463" duration="21000" />
+      <workItem from="1734357604480" duration="136000" />
+      <workItem from="1734357759109" duration="9000" />
+      <workItem from="1734357814796" duration="5000" />
+      <workItem from="1734357831626" duration="824000" />
+      <workItem from="1734358703475" duration="557000" />
+      <workItem from="1734359339819" duration="66000" />
+      <workItem from="1734359417133" duration="25000" />
+      <workItem from="1734359467783" duration="13000" />
+      <workItem from="1734359488118" duration="36000" />
+      <workItem from="1734359549367" duration="216000" />
+      <workItem from="1734359775281" duration="549000" />
+      <workItem from="1734360336249" duration="62000" />
+      <workItem from="1734360418751" duration="32000" />
+      <workItem from="1734360464908" duration="78000" />
+      <workItem from="1734360559600" duration="900000" />
+      <workItem from="1734361529291" duration="228000" />
+      <workItem from="1734361782758" duration="46000" />
+      <workItem from="1734361844637" duration="3257000" />
+      <workItem from="1734365151123" duration="12000" />
+      <workItem from="1734365196990" duration="567000" />
+      <workItem from="1734365792961" duration="98000" />
+      <workItem from="1734365913324" duration="28000" />
+      <workItem from="1734365957138" duration="66000" />
+      <workItem from="1734366064471" duration="125000" />
+      <workItem from="1734366203333" duration="47000" />
+      <workItem from="1734366256892" duration="7000" />
+      <workItem from="1734366286609" duration="19000" />
+      <workItem from="1734366318368" duration="559000" />
+      <workItem from="1734366905868" duration="2668000" />
+      <workItem from="1734370655825" duration="1307000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/SAPR_for_Rami$main.coverage" NAME="main Coverage Results" MODIFIED="1734371942831" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>
