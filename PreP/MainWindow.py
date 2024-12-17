@@ -3,9 +3,14 @@ import tkinter as tk
 from collections import defaultdict
 from tkinter import ttk, Menu, filedialog
 
-from PIL.ImageOps import expand
+import numpy as np
 
 from PreP import InputValidator, ConstructionDraw
+from PostP import TablesCalc, SectionCalc, FileCalc
+from Proc import Porcessor
+
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.figure import Figure
 
 
 class StructuralApp:
@@ -49,7 +54,7 @@ class StructuralApp:
         menu_bar.add_cascade(label="Расчеты", menu=calc_menu)
 
         epure_menu = Menu(menu_bar, tearoff=0)
-        epure_menu.add_command(label="Эпюры")
+        epure_menu.add_command(label="Эпюры", command=self.show_epura_interface)
         menu_bar.add_cascade(label="Эпюры", menu=epure_menu)
 
         self.root.config(menu=menu_bar)
@@ -74,7 +79,7 @@ class StructuralApp:
 
         ttk.Button(self.scrollable_frame, text="Создать", command=self.create_element).grid(row=0, column=0,
                                                                                                  padx=5, pady=5)
-        labels = ["Нач. узел, F", "Кон. узел, F", "A, м^2", "L, м", "E, Pa", "сигма, Pa", "q, H/m"]
+        labels = ["Нач. узел, F", "Кон. узел, F", "A, м^2", "L, м", "E, Па", "[σ], Па", "q, Н/м"]
         for i, text in enumerate(labels, start=1):
             ttk.Label(self.scrollable_frame, text=text).grid(row=0, column=i, padx=5, pady=5)
 
@@ -221,23 +226,20 @@ class StructuralApp:
                 self.reset_input()
 
                 for i in range(len(data['f1'])):
-                    if i == 0:
-                        self.rows[0][1].insert(0, data['f1'][0])
-                        self.rows[0][2].insert(0, data['f2'][0])
-                        self.rows[0][3].insert(0, data['A'][0])
-                        self.rows[0][4].insert(0, data['L'][0])
-                        self.rows[0][5].insert(0, data['E'][0])
-                        self.rows[0][6].insert(0, data['sigma'][0])
-                        self.rows[0][7].insert(0, data['q'][0])
-                    else:
+
+                    self.rows[i][1].delete(0, tk.END)
+                    self.rows[i][2].delete(0, tk.END)
+                    self.rows[i][7].delete(0, tk.END)
+
+                    self.rows[i][1].insert(0, data['f1'][i])
+                    self.rows[i][2].insert(0, data['f2'][i])
+                    self.rows[i][3].insert(0, data['A'][i])
+                    self.rows[i][4].insert(0, data['L'][i])
+                    self.rows[i][5].insert(0, data['E'][i])
+                    self.rows[i][6].insert(0, data['sigma'][i])
+                    self.rows[i][7].insert(0, data['q'][i])
+                    if i != len(data['f1']) - 1:
                         self.add_element()
-                        self.rows[-1][1].insert(0, data['f1'][i])
-                        self.rows[-1][2].insert(0, data['f2'][i])
-                        self.rows[-1][3].insert(0, data['A'][i])
-                        self.rows[-1][4].insert(0, data['L'][i])
-                        self.rows[-1][5].insert(0, data['E'][i])
-                        self.rows[-1][6].insert(0, data['sigma'][i])
-                        self.rows[-1][7].insert(0, data['q'][i])
 
                 op_map = {
                     1: "Опора слева",
@@ -302,7 +304,88 @@ class StructuralApp:
 
 
     def create_report(self):
-        pass
+        self.collect_data()
+
+        if 1:
+            self.show_epura_interface(for_file=True)
+            us_t, calc_t = FileCalc.prepare_data(self.all_data)
+
+            FileCalc.create_word_report(us_t, calc_t, self.scheme, self.fig_n, self.fig_sigma, self.fig_u)
+
+
+    def show_epura_interface(self, for_file=False):
+        self.collect_data()
+
+        if 1:
+
+            l1, l2, l3 = Porcessor.find_coordinates(self.all_data)
+
+            def create_figure_epura_n_sigma(x_coords, y_coords, epur_type):
+                fig = Figure(figsize=(6, 4), dpi=100)
+                ax = fig.add_subplot(111)
+                size = len(y_coords)
+                main_lne = [0] * size
+
+                ax.plot(x_coords, main_lne, color='black')
+                ax.plot(x_coords, y_coords, color='black')
+                ax.fill_between(x_coords, main_lne, y_coords, color='grey')
+                ax.set_title(f"Эпюра {epur_type}(x)")
+                return fig
+
+            def create_figure_epura_u(data):
+                t = 0
+                fig = Figure(figsize=(6, 4), dpi=100)
+                ax = fig.add_subplot(111)
+
+                f1 = data['f1']
+                f2 = data['f2']
+                A = data['A']
+                L = data['L']
+                E = data['E']
+                sigma = data['sigma']
+                q = data['q']
+
+                for i, bar in enumerate(zip(f1, f2, A, L, E, sigma, q)):
+                    l, e, a, q = float(bar[3]), float(bar[4]), float(bar[2]), float(bar[-1])
+                    delta_0, delta_l = Porcessor.find_deltas(data)[i], Porcessor.find_deltas(data)[i + 1]
+
+                    x = np.linspace(0, l, 10000)
+                    y = [Porcessor.find_u(xi, delta_0, delta_l, l, q, e, a) for xi in x]
+
+                    ax.plot(x + t, y, color='black')
+                    ax.fill_between(x + t, [0] * len(x), y, color='grey')
+
+                    t += l
+
+                ax.set_title("Эпюра U(x)")
+                return fig
+
+            new_window = tk.Toplevel()
+            new_window.title("Просмотр Эпюр")
+            new_window.geometry("600x900")
+            new_window.resizable(False, False)
+
+            self.fig_n = create_figure_epura_n_sigma(l1, l2, "N")
+            self.fig_sigma = create_figure_epura_n_sigma(l1, l3, "σ")
+            self.fig_u = create_figure_epura_u(self.all_data)
+
+            def display_figure(parent, figure, row):
+                canvas = FigureCanvasTkAgg(figure, master=parent)
+                canvas.draw()
+                canvas.get_tk_widget().grid(row=row, column=0, padx=10, pady=10, sticky="nsew")
+
+            new_window.rowconfigure(0, weight=1)
+            new_window.rowconfigure(1, weight=1)
+            new_window.rowconfigure(2, weight=1)
+            new_window.columnconfigure(0, weight=1)
+
+            display_figure(new_window, self.fig_n, row=0)
+            display_figure(new_window, self.fig_sigma, row=1)
+            display_figure(new_window, self.fig_u, row=2)
+
+            if for_file:
+                new_window.destroy()
+
 
     def reset_input(self):
         for widgets in self.rows[1:]:
@@ -318,7 +401,14 @@ class StructuralApp:
         self.add_element()
 
     def section_calculation(self):
-        pass
+        self.collect_data()
+
+        if 1:
+            SectionCalc.create_section_window(self.all_data)
 
     def general_calculation(self):
-        pass
+        self.collect_data()
+
+        if 1:
+            tables = TablesCalc.prepare_tables(self.all_data, 10)
+            TablesCalc.create_notebook_with_tables(tables)
