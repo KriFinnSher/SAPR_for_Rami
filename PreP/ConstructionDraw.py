@@ -4,45 +4,30 @@ from io import BytesIO
 import warnings
 
 
-def change_scale(arr, k):
-    arr = [float(val) for val in arr]
-    min_val = min(arr)
-    max_val = max(arr)
-
-    if max_val <= min_val * k:
-        return arr
-
-    new_max_val = min_val * k
-    scaling_factor = (new_max_val - min_val) / (max_val - min_val)
-
-    new_arr = [min_val + (x - min_val) * scaling_factor for x in arr]
-    return new_arr
-
-
-def draw_scheme(lengths, heights, point_loads, dist_loads, left_support, right_support):
+def draw_scheme(lens, heights, dot_f, line_f, ls, rs):
 
     figure, scheme = plt.subplots()
 
-    sum_of_lens = sum(lengths)
+    sum_of_lens = sum(lens)
     sum_of_heights = sum(heights)
 
     mean_height = sum(heights) / len(heights)
-    mean_len_15 = (sum(lengths) / len(lengths)) / 15
+    mean_len_15 = (sum(lens) / len(lens)) / 15
 
-    min_length = min(lengths)
+    min_length = min(lens)
     max_height = max(heights)
     min_height = min(heights)
 
     x_coordinate = 0
     heights_lens_y = []
 
-    for length, height_of_rod in zip(lengths, heights):
+    for length, height_of_rod in zip(lens, heights):
         y_coordinate = max_height / 2 - height_of_rod / 2 + max_height * 2.5
         scheme.add_patch(plt.Rectangle((x_coordinate, y_coordinate), length, height_of_rod, edgecolor='#00a6ff', facecolor='blue'))
         heights_lens_y.append((height_of_rod, length, y_coordinate))
         x_coordinate += length
 
-    if left_support[0]:
+    if ls[0]:
         last_rod_y_coordinate = max(heights_lens_y, key=lambda h: h[0])[2]
         support_line = last_rod_y_coordinate + max_height / 2 - mean_height / 2
         scheme.arrow(0, support_line, 0, mean_height, head_width=0, head_length=0, fc='#ff0000', ec='#ff0000',
@@ -52,7 +37,7 @@ def draw_scheme(lengths, heights, point_loads, dist_loads, left_support, right_s
             plt.arrow(0, initial_y_coordinate, -mean_len_15, 0, color='#ff0000', head_width=0, head_length=0,
                       width=min_height / 1000)
 
-    if right_support[0]:
+    if rs[0]:
         last_rod_y_coordinate = max(heights_lens_y, key=lambda h: h[0])[2]
         support_line = last_rod_y_coordinate + max_height / 2 - mean_height / 2
         scheme.arrow(sum_of_lens, support_line, 0, mean_height, head_width=0, head_length=0, fc='#ff0000', ec='#ff0000',
@@ -62,11 +47,11 @@ def draw_scheme(lengths, heights, point_loads, dist_loads, left_support, right_s
             plt.arrow(sum_of_lens, initial_y_coordinate, mean_len_15, 0, color='#ff0000', head_width=0, head_length=0,
                       width=min_height / 1000)
 
-    temp_lengths = [0] + lengths
+    temp_lengths = [0] + lens
     for i in range(1, len(temp_lengths)):
         temp_lengths[i] = temp_lengths[i] + temp_lengths[i - 1]
 
-    for i, dist_load in enumerate(dist_loads):
+    for i, dist_load in enumerate(line_f):
         load_idx = i // 2
         y_base_coordinate = heights_lens_y[load_idx][2]
         height_of_rod = heights_lens_y[load_idx][0]
@@ -102,7 +87,7 @@ def draw_scheme(lengths, heights, point_loads, dist_loads, left_support, right_s
                           head_length=sum_of_lens / 90, width=min_height / 10000, ec='#ffdd00')
                 x_temp -= arrow_len
 
-    for i, conc_load in enumerate(point_loads):
+    for i, conc_load in enumerate(dot_f):
         if float(conc_load) > 0:
             destination = 1
         elif float(conc_load) == 0:
@@ -127,7 +112,7 @@ def draw_scheme(lengths, heights, point_loads, dist_loads, left_support, right_s
 
     with warnings.catch_warnings():
         warnings.simplefilter("ignore", UserWarning)
-        scheme.set_xlim(-sum(lengths) * 0.15, sum(lengths) * 1.35)
+        scheme.set_xlim(-sum(lens) * 0.15, sum(lens) * 1.35)
         scheme.set_ylim(0, max_height * 4)
 
     scheme.axis('off')
@@ -150,3 +135,18 @@ def display_scheme(canvas, lengths, heights, conc_loads, dist_loads, left_z, rig
     canvas.create_image(100, 0, anchor='nw', image=img)
 
     return buf
+
+
+def change_scale(arr, k):
+    arr = [float(val) for val in arr]
+    min_val = min(arr)
+    max_val = max(arr)
+
+    if max_val <= min_val * k:
+        return arr
+
+    new_max_val = min_val * k
+    scaling_factor = (new_max_val - min_val) / (max_val - min_val)
+
+    new_arr = [min_val + (x - min_val) * scaling_factor for x in arr]
+    return new_arr

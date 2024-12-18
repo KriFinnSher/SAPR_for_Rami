@@ -9,25 +9,25 @@ def create_section_window(input_data):
     def find_section(rod_num_entry, rod_x_entry, section_table):
 
         temp_rod_num = rod_num_entry.get()
-        if temp_rod_num == "":
-            messagebox.showerror("Ошибка ввода", f"Введите корректный номер стержня [1-{len(input_data['f1'])}]")
+        if temp_rod_num == "" or int(temp_rod_num) < 1 or int(temp_rod_num) > len(input_data['f1']):
+            messagebox.showerror("Ошибка ввода", f"Введите правильный номер стержня [1-{len(input_data['f1'])}]")
             return
 
         temp_rod_x = rod_x_entry.get()
         if temp_rod_x == "":
             messagebox.showerror("Ошибка ввода",
-                                 f"Введите корректную координату стержня [0; {input_data['L'][int(temp_rod_num)-1]}]")
+                                 f"Введите правильную координату x стержня [0; {input_data['L'][int(temp_rod_num)-1]}]")
             return
 
         rod_num = int(rod_num_entry.get())
         rod_x = float(rod_x_entry.get())
 
         if len(input_data['f1']) < rod_num:
-            messagebox.showerror("Ошибка ввода", f"Введите корректный номер стержня [1-{len(input_data['f1'])}]")
+            messagebox.showerror("Ошибка ввода", f"Введите правильный номер стержня [1-{len(input_data['f1'])}]")
             return
 
         if rod_x > float(input_data['L'][int(rod_num)-1]):
-            messagebox.showerror("Ошибка ввода", f"Введите корректную координату стержня [0; {input_data['L'][int(temp_rod_num)-1]}]")
+            messagebox.showerror("Ошибка ввода", f"Введите правильную координату x стержня [0; {input_data['L'][int(temp_rod_num)-1]}]")
             return
 
         section_u, section_n, section_sigma = Porcessor.find_section(input_data, rod_num, rod_x)
@@ -45,7 +45,7 @@ def create_section_window(input_data):
             section_table.insert("", "end", values=(section_n, section_u, section_sigma, rod_sigma))
 
     section_window = tk.Toplevel()
-    section_window.title('Сечение')
+    section_window.title('Расчет сечения')
     section_window.geometry('340x180')
     section_window.resizable(False, False)
 

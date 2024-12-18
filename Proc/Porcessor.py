@@ -123,8 +123,8 @@ def find_deltas(input_data):
     ps = defaultdict(float)
     for i in range(len(f1)):
         ps[i+1] += float(f1[i])
-    for i in range(1, len(f2)):
-        ps[i+1] += float(f2[i-1])
+    for i in range(len(f2)):
+        ps[i+2] += float(f2[i])
 
     b_mat = find_b(ps, qs, lens, input_data['op'])
     A_mat = find_A(prepare_k_mats(input_data), input_data['op'])

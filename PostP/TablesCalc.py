@@ -41,7 +41,7 @@ def create_notebook_with_tables(data):
                 frame.pack_forget()
 
     window = tk.Tk()
-    window.title("Расчетные таблицы")
+    window.title("Таблицы стержней")
     window.geometry("500x400")
     window.resizable(False, False)
 

@@ -277,7 +277,7 @@ class StructuralApp:
 
     def drawing(self):
         self.collect_data()
-        if 1: # поменяй на проверку ввода
+        if InputValidator.tcoi(self.all_data): # поменяй на проверку ввода
             self.all_data["L"] = ConstructionDraw.change_scale(self.all_data["L"], 10)
             ls = [float(val) for val in self.all_data["L"]]
 
@@ -306,7 +306,7 @@ class StructuralApp:
     def create_report(self):
         self.collect_data()
 
-        if 1:
+        if InputValidator.tcoi(self.all_data):
             self.show_epura_interface(for_file=True)
             us_t, calc_t = FileCalc.prepare_data(self.all_data)
 
@@ -316,7 +316,7 @@ class StructuralApp:
     def show_epura_interface(self, for_file=False):
         self.collect_data()
 
-        if 1:
+        if InputValidator.tcoi(self.all_data):
 
             l1, l2, l3 = Porcessor.find_coordinates(self.all_data)
 
@@ -403,12 +403,12 @@ class StructuralApp:
     def section_calculation(self):
         self.collect_data()
 
-        if 1:
+        if InputValidator.tcoi(self.all_data):
             SectionCalc.create_section_window(self.all_data)
 
     def general_calculation(self):
         self.collect_data()
 
-        if 1:
+        if InputValidator.tcoi(self.all_data):
             tables = TablesCalc.prepare_tables(self.all_data, 10)
             TablesCalc.create_notebook_with_tables(tables)
